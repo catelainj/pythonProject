@@ -1,97 +1,65 @@
 #Jules Catelain
 #tp3
-#30 octobre 2023
+#12 décembre 2023
 
-#import
+#inspirée des informations donnés sur le document classroom
 import random
+niveau_de_vie = 20
+force_de_adversaire = 0
+numéro_adversaire = 0
+victoires_consecutives = 0
+nombre_combat = 0
+nombre_victoire = 0
+nombre_défaite = 0
+choix = None
+while choix != '4':
 
-#def pour appeler le jeu
-def joue():
-    #definir les variables
-    vies = 20
-    victoires = 0
-    defaites = 0
-    adversaires = 0
-    wins_in_a_row = 0
-
-    #definir while pour que le jeu stop a zero vies
-    while vies > 0:
-        #random vie de adversaire
-        ennemy_strengh = random.randint(1, 5)
-        print(f"Tu tombe contre un ennemie de niveau : {ennemy_strengh}")
-
-        print("Tu fais quoi mtn?")
-        print("1- Tu le bat?")
-        print("2- Évite tu le combat?")
-        print("3- afficher les règles du jeu")
-        print("4- quitter la partie")
-
-        choix = input("entre ton choix : ")
-
-        #choix 1
-        if choix == "1":
-            score = random.randint(1, 6)
-            print("\nLancer dé :", score)
-
-            #victoire
-            if score > ennemy_strengh:
-                print("Ennemie #", adversaires)
-                print("Force du ennemie:", ennemy_strengh)
-                print("vie du user:", vies)
-                print("combat", adversaires, ":", victoires, "contre", defaites)
-                print("\nLancer dé :", score)
-                vies += ennemy_strengh
-                victoires += 1
-                adversaires += 1
-                wins_in_a_row += 1
-                print("Last battle = dub")
-                print("vie du user:", vies)
-                print("victoires consecutives:", wins_in_a_row)
-
-            #défaite
-            else:
-                print("ennemei #", adversaires)
-                print("force de l'ennemie:", ennemy_strengh)
-                print("vie du user:", vies)
-                print("combat", adversaires, ":", victoires, "contre", defaites)
-                print("Lancer dé:", score)
-                vies -= adversaires
-                defaites += 1
-                wins_in_a_row = 0
-                print("vie du user, vies")
-
-        #choix 2
-        elif choix == "2":
-            vies -= 1
-            print("tu evite la fight. tu perd un point de vie pour avoir peur")
-            print("vie du user:", vies)
-
-        #choix 3
-        elif choix == "3":
-            print("\nPour gagner un combat, la valeur du dé doit etre meilleure que la force de l'ennemie")
-            print("Quand ca arrive, la vie du user est augmenté avec la force du ennemie")
-            print("Tu perd la fight' quand la valeur du dé est inférieur a la force de l'ennemie")
-            print("\nGame ovr quand la vie du user est a 0")
-            print("\nLe user peut eviter une fight mais perd un point de vie si il le fait.\n\n")
-
-        #choix 4
-        elif choix == "4":
-            print("\nGame over")
-            break
-
-    print(f"Game over, ta battue {victoires} monstre(s).")
-    joue()
-
-#Démarer le jeu
-joue()
+#point  de départ
+    numéro_adversaire +=1
+    force_de_adversaire = random.randint(5, 10)
+    if victoires_consecutives == 3:
+        force_de_adversaire = random.randint(1,15)
+        print('boss')
+    print("la force de l'aversaire est de", force_de_adversaire)
+    print("Tu as le choix entre 1- combatttre l'adversaire, 2- contourner l'adversaire et prendre une porte, "
+      "3- afficher les règles du jeu ou 4- quitter la partie")
+    choix = input("Quel choix prend-tu?")
+    if choix == "1":
+        print("Adversaire:", numéro_adversaire, '')
+        de = random.randint(1,6) + random.randint(1,6)
+        if de < force_de_adversaire:
+            print('defaite')
+            nombre_défaite +=1
+            niveau_de_vie = niveau_de_vie - force_de_adversaire
+            victoires_consecutives = 0
+            print('ton niveau de vie est de', niveau_de_vie)
+            print('ton niveau de victoires conscutives est de', victoires_consecutives)
 
 
+        else:
+            print("Victoire!")
+            nombre_victoire += 1
+            niveau_de_vie = 20
+            victoires_consecutives +=1
+            print('ton niveau de vie est de', niveau_de_vie)
+            print('ton niveau de victoires conscutives est de', victoires_consecutives)
+
+    elif choix == "2":
+        print("yu décide de éviter le combat, tu perd un point de vie")
+        niveau_de_vie -=1
+        print('Ton niveau de vie est maintenant', niveau_de_vie)
 
 
+    elif choix == "3":
+        print("Voici les règles du jeu: Un, pour réussire un combat, la valeur de la force de ladversaire doi être inférieur a la valeur de dé")
+        print("Dans ce cas, la vie de lusager est augmenté de la force de adversaire")
+        print("Une défaite a lieu au contraire des rèegles de la victoire mensionné précedement")
+        print("Dans la cas d'une défaite, la vie de l'usager est soustrait de la force de L'adversaire.")
+        print("Tu peux combattre ou éviter chaque adversaire, mais si tu l'évite, tu perd un point de vie")
 
+    #elif choix == 4:
 
-
-
+print('terminé')
 
 
 
